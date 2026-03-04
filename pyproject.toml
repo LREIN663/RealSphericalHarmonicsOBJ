@@ -27,3 +27,6 @@ package-dir = {"" = "src"}
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["realsphericalharmonicsobj*"]
+
+[project.scripts]
+realspherical = "realsphericalharmonicsobj.realspherical:main"
