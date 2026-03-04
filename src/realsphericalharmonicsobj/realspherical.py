@@ -65,14 +65,14 @@ def compute_real_spherical_harmonic(l, m, theta, phi):
     # scipy.special.sph_harm uses the physics convention:
     # sph_harm(m, l, phi, theta) where phi is azimuthal and theta is polar
     # Y = sph_harm(abs(m), l, phi, theta)
-    Y = sph_harm(abs(m), l, phi, theta)
+    Yc = sph_harm(m, l, phi, theta)  # NOTE: m (can be negative) and order phi,theta
 
-    if m < 0:
-        return np.sqrt(2) * (-1)**m * Y.imag
-    elif m > 0:
-        return np.sqrt(2) * (-1)**m * Y.real
+    if m > 0:
+        return np.sqrt(2) * (-1) ** m * Yc.real
+    elif m < 0:
+        return np.sqrt(2) * (-1) ** m * Yc.imag
     else:
-        return Y.real
+        return Yc.real
 
 
 def export_spherical_harmonic(l, m, filename, n_theta=100, n_phi=100,
