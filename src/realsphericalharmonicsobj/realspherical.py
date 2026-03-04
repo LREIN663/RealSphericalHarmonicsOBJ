@@ -10,11 +10,8 @@ import argparse
 import os
 import numpy as np
 import trimesh
-try:
-    from scipy.special import sph_harm_y
-except ImportError:
-    from scipy.special import sph_harm as sph_harm_y  # Fallback if sph_harm_y is not available
 
+from scipy.special import sph_harm
 
 def create_spherical_grid(n_theta=100, n_phi=100):
     """Create a spherical grid for evaluating spherical harmonics.
@@ -68,17 +65,14 @@ def compute_real_spherical_harmonic(l, m, theta, phi):
     # scipy.special.sph_harm uses the physics convention:
     # sph_harm(m, l, phi, theta) where phi is azimuthal and theta is polar
     # Y = sph_harm(abs(m), l, phi, theta)
-    Y = sph_harm_y(l, abs(m), theta, phi)
-    
-    # Convert to real spherical harmonics
+    Y = sph_harm(abs(m), l, phi, theta)
+
     if m < 0:
-        Y = np.sqrt(2) * (-1)**m * Y.imag
+        return np.sqrt(2) * (-1)**m * Y.imag
     elif m > 0:
-        Y = np.sqrt(2) * (-1)**m * Y.real
+        return np.sqrt(2) * (-1)**m * Y.real
     else:
-        Y = Y.real
-    
-    return Y
+        return Y.real
 
 
 def export_spherical_harmonic(l, m, filename, n_theta=100, n_phi=100,
