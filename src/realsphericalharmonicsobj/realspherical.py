@@ -10,7 +10,10 @@ import argparse
 import os
 import numpy as np
 import trimesh
-from scipy.special import sph_harm_y
+try:
+    from scipy.special import sph_harm_y
+except ImportError:
+    from scipy.special import sph_harm as sph_harm_y  # Fallback if sph_harm_y is not available
 
 
 def create_spherical_grid(n_theta=100, n_phi=100):

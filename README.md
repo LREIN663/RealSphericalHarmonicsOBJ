@@ -67,30 +67,30 @@ python realspherical.py --examples
 ### Python API
 
 ```python
-from realspherical import export_spherical_harmonic, export_superposition
+from realsphericalharmonicsobj.realspherical import export_spherical_harmonic, export_superposition
 
 # Export a single spherical harmonic (default red/blue colors)
 export_spherical_harmonic(l=2, m=0, filename="Y_2_0.obj")
 
 # Export with custom colors
 export_spherical_harmonic(
-    l=3, m=2, 
+    l=3, m=2,
     filename="Y_3_2.obj",
     color_positive=(0.0, 1.0, 0.0),  # Green for positive
-    color_negative=(1.0, 0.0, 1.0)   # Magenta for negative
+    color_negative=(1.0, 0.0, 1.0)  # Magenta for negative
 )
 
 # Export a linear combination
 factors = [
     (3, -3, 0.5),  # l=3, m=-3, coefficient=0.5
     (3, -2, 0.3),  # l=3, m=-2, coefficient=0.3
-    (3,  0, 0.7),  # l=3, m=0,  coefficient=0.7
+    (3, 0, 0.7),  # l=3, m=0,  coefficient=0.7
 ]
 export_superposition(
-    factors, 
+    factors,
     filename="combo.obj",
     color_positive=(1.0, 0.65, 0.0),  # Orange
-    color_negative=(0.5, 0.0, 0.5)    # Purple
+    color_negative=(0.5, 0.0, 0.5)  # Purple
 )
 ```
 
